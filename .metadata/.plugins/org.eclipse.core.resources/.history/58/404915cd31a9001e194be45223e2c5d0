@@ -22,8 +22,8 @@ spring:
     
 localFilePath: c:/eStock/
 batchChunkSize: 100
-accessKey: 
-secretKey: 
+accessKey: AKIA6OGQRCAJ6REG7R4B
+secretKey: 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
 bucketName: e-stock-data
 dataFileName: eStock_Orders.csv
 inboundS3FilePath: Inbound/
