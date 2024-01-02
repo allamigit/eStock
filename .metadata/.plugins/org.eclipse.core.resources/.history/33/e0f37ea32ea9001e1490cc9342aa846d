@@ -77,6 +77,11 @@
 							"key": "file-name",
 							"type": "file",
 							"src": "/C:/eStock/eStock_Orders.csv"
+						},
+						{
+							"key": "file-source",
+							"value": "local",
+							"type": "text"
 						}
 					]
 				},

@@ -17,7 +17,7 @@ public class OrdersReader {
 	@Value("${localFilePath}")
 	private String localFilePath;
 
-	public FlatFileItemReader<DataFile> readDataFile() {
+	public FlatFileItemReader<DataFile> readCSVFile() {
 		Path filePath = Paths.get(localFilePath, "eStock_Orders.csv");
 		
 		FlatFileItemReader<DataFile> flatFileItemReader = new FlatFileItemReader<>();

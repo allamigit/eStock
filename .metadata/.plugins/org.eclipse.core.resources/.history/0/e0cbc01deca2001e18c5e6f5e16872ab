@@ -1,5 +1,0 @@
-package e_appliance_warehouse.model;
-
-public class OrderDetailsResponse {
-
-}

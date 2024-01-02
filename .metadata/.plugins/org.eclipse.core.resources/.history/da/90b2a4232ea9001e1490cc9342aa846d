@@ -76,6 +76,23 @@ public class OrdersService {
 		return fileLines;
 	}
 	
+//	public List<String> readOrdersDataFile(MultipartFile fileName) {		
+//		Path filePath = Paths.get("c:/eStock", fileName.getOriginalFilename());
+//		
+//		List<String> fileLines = null;
+//		try {
+//			String allLines = Files.readAllLines(filePath, StandardCharsets.US_ASCII).toString();
+//			String[] line = allLines.split(", ");
+//			fileLines = Arrays.asList(line);
+//			System.out.println(fileLines);
+//		} 
+//		catch (IOException e) {
+//		  e.printStackTrace();
+//		}
+//		
+//		return fileLines;
+//	}
+
 	public List<Orders> processOrdersDataFile(List<String> fileLines) {	
 		List<Orders> ordersList = new ArrayList<>();
 	    for(int a=1; a<fileLines.size(); a++) {
