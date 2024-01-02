@@ -7,7 +7,7 @@ spring:
     url: jdbc:postgresql://roc2007.c2ywefhxo11e.us-east-2.rds.amazonaws.com/postgres?currentSchema=e-stock
     driver-class-name: org.postgresql.Driver
     username: postgres
-    password: 
+    password: M01041972i
 
   jpa:
     properties:
