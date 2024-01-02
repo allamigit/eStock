@@ -1,0 +1,30 @@
+package com.estock.batch;
+
+import java.util.List;
+
+import org.springframework.batch.item.ItemWriter;
+import org.springframework.beans.factory.annotation.Value;
+
+import com.estock.model.Orders;
+import com.estock.repository.OrdersRepository;
+import com.estock.repository.StockRepository;
+
+public class OrdersWriter implements ItemWriter<Orders> {
+
+	private StockRepository stockRepository;
+
+	private OrdersRepository ordersRepository;
+
+	@Value("${localFilePath}")
+	private String localFilePath;
+
+    @Override
+    public void write(List<? extends Orders> items) throws Exception {
+        // Write processed data to the database
+    	ordersRepository.saveAll(items);
+    	
+    	stockRepository.save(entity);
+    	
+    }
+    
+}

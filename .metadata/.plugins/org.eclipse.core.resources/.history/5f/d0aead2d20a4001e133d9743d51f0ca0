@@ -1,0 +1,19 @@
+server:
+  port: 8001
+  servlet.context-path: /e-stock
+
+spring:
+  datasource:
+    url: jdbc:postgresql://roc2007.c2ywefhxo11e.us-east-2.rds.amazonaws.com/postgres?currentSchema=e-stock
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: M01041972i
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+#        format_sql: true
+        ddl-auto: validate
+    open-in-view: true
+    show-sql: false

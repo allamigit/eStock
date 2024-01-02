@@ -1,0 +1,45 @@
+package com.estock.batch;
+
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.Step;
+import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
+import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.item.ItemProcessor;
+import org.springframework.batch.item.ItemReader;
+import org.springframework.batch.item.ItemWriter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import com.estock.model.Orders;
+
+@Configuration
+@EnableBatchProcessing
+public class BatchConfiguration {
+
+    @Autowired
+    private JobBuilderFactory jobBuilderFactory;
+
+    @Autowired
+    private StepBuilderFactory stepBuilderFactory;
+
+    @Bean
+    public Job ordersDataJob(Step ordersDataStep) {
+        return jobBuilderFactory.get("ordersDataJob")
+                .start(ordersDataStep)
+                .build();
+    }
+
+    @SuppressWarnings("unchecked")
+	@Bean
+    public Step ordersDataStep(OrdersReader reader, OrdersProcessor processor, OrdersWriter writer) {
+        return stepBuilderFactory.get("ordersDataStep")
+                .<Orders, Orders> chunk(10)
+                .reader((ItemReader<? extends Orders>) reader)
+                .processor((ItemProcessor<? super Orders, ? extends Orders>) processor)
+                .writer((ItemWriter<? super Orders>) writer)
+                .build();
+    }
+    
+}

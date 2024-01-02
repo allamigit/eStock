@@ -1,0 +1,5 @@
+package com.estock.batch;
+
+public class BatchConfig {
+
+}

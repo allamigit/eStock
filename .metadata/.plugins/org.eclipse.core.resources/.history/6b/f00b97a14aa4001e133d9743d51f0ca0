@@ -1,0 +1,5 @@
+package com.estock.model;
+
+public class DataFile {
+
+}

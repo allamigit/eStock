@@ -1,0 +1,68 @@
+
+CREATE SEQUENCE "e-stock".stock_seq
+	INCREMENT BY 2
+	MINVALUE 102
+	MAXVALUE 2000
+	START 102
+	CACHE 1
+	NO CYCLE;
+CREATE TABLE "e-stock".stock (
+	item_code int8 NOT NULL DEFAULT nextval('stock_seq'),
+	item_name varchar(60) NOT NULL,
+	item_stock_qty int4 NOT NULL,
+	item_price numeric(5, 2) NOT NULL,
+	CONSTRAINT pk_stock PRIMARY KEY (item_code),
+	CONSTRAINT uk_item_name UNIQUE (item_name)
+);
+
+
+CREATE TABLE "e-stock".orders (
+	order_id int8 NOT NULL,
+	order_customer varchar(60) NOT NULL,
+	order_date timestamp NOT NULL DEFAULT now(),
+	update_date timestamp NULL DEFAULT now(),
+	item_code int8 NOT NULL,
+	item_sold_qty int4 NOT NULL,
+	item_price numeric(5, 2) NOT NULL,
+	order_total_amount numeric(10, 2) NULL,
+	order_status varchar(20) NOT NULL,
+	order_comment varchar(100) NULL,
+	CONSTRAINT pk_orders PRIMARY KEY (order_id),
+	CONSTRAINT fk_orders_item_code FOREIGN KEY (item_code) REFERENCES "e-stock".stock(item_code)
+);
+
+--alter table orders alter column order_date type timestamp;
+--alter table orders add column order_comment varchar(100) null;
+
+insert into stock (item_name, item_stock_qty, item_price) values ('Wrieless Keyboard & Mouse Set', 200, 25.00);
+insert into stock (item_name, item_stock_qty, item_price) values ('Wrieless Keyboard', 100, 12.00);
+insert into stock (item_name, item_stock_qty, item_price) values ('Wrieless Mouse', 100, 9.00);
+insert into stock (item_name, item_stock_qty, item_price) values ('USB Keyboard & Mouse Set', 300, 19.00);
+insert into stock (item_name, item_stock_qty, item_price) values ('USB Keyboard', 150, 8.00);
+insert into stock (item_name, item_stock_qty, item_price) values ('USB Mouse', 150, 6.00);
+insert into stock (item_name, item_stock_qty, item_price) values ('24 Inch Monitor', 100, 65.00);
+insert into stock (item_name, item_stock_qty, item_price) values ('27 Inch Monitor', 100, 85.00);
+insert into stock (item_name, item_stock_qty, item_price) values ('Wrieless Headset', 120, 42.00);
+insert into stock (item_name, item_stock_qty, item_price) values ('USB Headset', 160, 15.00);
+
+insert into orders values (6401, 'XYZ', now(), null, 102, 20, 25.00, 500.00, 'COMPLETE', null);
+insert into orders values (6402, 'ABC', now(), null, 114, 10, 65.00, 650.00, 'COMPLETE', null);
+insert into orders values (6403, 'ABC', now(), null, 118, 11, 42.00, 462.00, 'COMPLETE', null);
+insert into orders values (6404, 'ABC', now(), null, 108, 12, 19.00, 228.00, 'COMPLETE', null);
+
+select * from stock;
+
+select * from orders;
+
+update orders set update_date = null, item_sold_qty = 20, order_total_amount = 500, order_status = 'NEW_COMPLETE', order_comment = null where order_id = 6401;
+update orders set update_date = null, item_sold_qty = 10, order_total_amount = 650, order_status = 'NEW_COMPLETE', order_comment = null where order_id = 6402;
+update orders set update_date = null, item_sold_qty = 11, order_total_amount = 462, order_status = 'NEW_COMPLETE', order_comment = null where order_id = 6403;
+update orders set update_date = null, item_sold_qty = 12, order_total_amount = 228, order_status = 'NEW_COMPLETE', order_comment = null where order_id = 6404;
+delete from orders where order_id IN (6405, 6406);
+
+update stock set item_stock_qty = 180 where item_code = 102;
+update stock set item_stock_qty = 288 where item_code = 108;
+update stock set item_stock_qty = 90 where item_code = 114;
+update stock set item_stock_qty = 100 where item_code = 116;
+update stock set item_stock_qty = 109 where item_code = 118;
+update stock set item_stock_qty = 160 where item_code = 120;

@@ -1,0 +1,244 @@
+{
+	"info": {
+		"_postman_id": "208cdeb6-bb87-41f7-bf91-243742ce703d",
+		"name": "eStock",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12075612"
+	},
+	"item": [
+		{
+			"name": "Get Order Details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8001/e-stock/orders/orderDetails?order-id=6403",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"e-stock",
+						"orders",
+						"orderDetails"
+					],
+					"query": [
+						{
+							"key": "order-id",
+							"value": "6403"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Order Details From TXT File",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file-name",
+							"type": "file",
+							"src": "/C:/eStock/eStock_Orders.txt"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8001/e-stock/orders/local/readFromFile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"e-stock",
+						"orders",
+						"local",
+						"readFromFile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Order Details From CSV File",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file-name",
+							"type": "file",
+							"src": "/C:/eStock/eStock_Orders.csv"
+						},
+						{
+							"key": "file-source",
+							"value": "local",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8001/e-stock/orders/batch/readFromFile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"e-stock",
+						"orders",
+						"batch",
+						"readFromFile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Download File from S3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8001/e-stock/orders/s3/download",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"e-stock",
+						"orders",
+						"s3",
+						"download"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload File to S3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8001/e-stock/orders/s3/upload?file-name-list=eStock_Orders_Complete.csv,eStock_Orders_Fail.csv",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"e-stock",
+						"orders",
+						"s3",
+						"upload"
+					],
+					"query": [
+						{
+							"key": "file-name-list",
+							"value": "eStock_Orders_Complete.csv,eStock_Orders_Fail.csv"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Read from S3 File",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8001/e-stock/orders/s3/readFromFile?file-name=eStock_Orders.csv",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"e-stock",
+						"orders",
+						"s3",
+						"readFromFile"
+					],
+					"query": [
+						{
+							"key": "file-name",
+							"value": "eStock_Orders.csv"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Write to S3 File",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8001/e-stock/orders/s3/writeToFile?file-name-list=eStock_Orders_Complete.csv,eStock_Orders_Fail.csv&file-content=6401,ABC",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"e-stock",
+						"orders",
+						"s3",
+						"writeToFile"
+					],
+					"query": [
+						{
+							"key": "file-name-list",
+							"value": "eStock_Orders_Complete.csv,eStock_Orders_Fail.csv"
+						},
+						{
+							"key": "file-content",
+							"value": "6401,ABC"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clear S3 Folder",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8001/e-stock/orders/s3/clearFolder?folder-name=Outbound",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8001",
+					"path": [
+						"e-stock",
+						"orders",
+						"s3",
+						"clearFolder"
+					],
+					"query": [
+						{
+							"key": "folder-name",
+							"value": "Outbound"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

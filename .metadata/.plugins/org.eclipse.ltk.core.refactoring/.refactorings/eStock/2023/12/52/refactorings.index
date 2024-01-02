@@ -1,0 +1,28 @@
+1703483612404	Rename type 'SalesOrder'
+1703484426752	Delete elements
+1703484465398	Delete elements
+1703484661603	Delete element
+1703484670462	Delete element
+1703484690454	Delete elements
+1703484716554	Delete elements
+1703484734791	Delete elements
+1703484747055	Delete element
+1703484765544	Rename type 'SalesOrderController'
+1703484777314	Delete element
+1703484794167	Rename type 'SalesOrderService'
+1703484832332	Rename type 'SalesOrderRepository'
+1703485273367	Rename type 'eApplianceWarehouse'
+1703485376578	Rename package 'e_appliance_warehouse'
+1703485400408	Rename package 'e_appliance_warehouse.controller'
+1703485424780	Rename package 'e_appliance_warehouse.model'
+1703485437695	Rename package 'e_appliance_warehouse.repository'
+1703485453174	Rename package 'e_appliance_warehouse.service'
+1703485478993	Rename package 'e_appliance_warehouse.table'
+1703485493195	Move compilation units
+1703485498281	Delete element
+1703486049296	Delete element
+1703623338983	Delete element
+1703633320120	Rename local variable 'str'
+1703633336200	Rename local variable 'str'
+1703633442648	Rename type 'BatchConfig'
+1703652958528	Encapsulate field 'bufferedReader'

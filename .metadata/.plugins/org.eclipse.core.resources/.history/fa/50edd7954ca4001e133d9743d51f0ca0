@@ -1,0 +1,50 @@
+package com.estock.batch;
+
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.Step;
+import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
+import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.item.ItemProcessor;
+import org.springframework.batch.item.ItemReader;
+import org.springframework.batch.item.ItemWriter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import com.estock.model.DataFile;
+import com.estock.model.Orders;
+
+@Configuration
+@EnableBatchProcessing
+public class BatchConfiguration {
+
+    @Autowired
+    private JobBuilderFactory jobBuilderFactory;
+
+    @Autowired
+    private StepBuilderFactory stepBuilderFactory;
+
+	@Value("${batchChunkSize}")
+	private Integer batchChunkSize;
+
+   @Bean
+    public Job ordersDataJob(Step ordersDataStep) {
+        return jobBuilderFactory.get("ordersDataJob")
+                .start(ordersDataStep)
+                .build();
+    }
+
+    @SuppressWarnings("unchecked")
+	@Bean
+    public Step ordersDataStep(OrdersReader reader, OrdersProcessor processor, OrdersWriter writer) {
+        return stepBuilderFactory.get("ordersDataStep")
+                .<DataFile, Orders> chunk(this.batchChunkSize)
+                .reader(reader)
+                .processor(processor)
+                .writer(writer)
+                .build();
+    }
+    
+}
