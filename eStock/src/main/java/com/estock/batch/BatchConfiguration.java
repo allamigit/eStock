@@ -1,20 +1,20 @@
 package com.estock.batch;
 
 import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 import com.estock.model.DataFile;
 import com.estock.model.Orders;
 
-@Configuration
-@EnableBatchProcessing
+@Component
 public class BatchConfiguration {
 
     @Autowired
@@ -26,7 +26,6 @@ public class BatchConfiguration {
 	@Value("${batchChunkSize}")
 	private Integer batchChunkSize;
 
-	
 	@Bean
     public OrdersReader ordersReader() {
         return new OrdersReader();
@@ -42,6 +41,11 @@ public class BatchConfiguration {
         return new OrdersWriter();
     }
 
+	@Bean
+    public BatchJobParameterPrinter batchJobParameterPrinter() {
+        return new BatchJobParameterPrinter();
+    }
+	
 	@Bean
     public Job ordersDataJob(Step ordersDataStep) {
         return jobBuilderFactory.get("ordersDataJob")
@@ -59,4 +63,14 @@ public class BatchConfiguration {
                 .build();
     }
     
+}
+
+class BatchJobParameterPrinter {
+    public void printJobParameters(JobExecution jobExecution) {
+        // Access JobParameters from JobExecution
+        JobParameters jobParameters = jobExecution.getJobParameters();
+
+        // Use jobParameters as needed
+        System.out.println("Job Parameters: " + jobParameters.toString());
+    }
 }

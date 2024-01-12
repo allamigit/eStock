@@ -1,5 +1,0 @@
-package com.estock.s3;
-
-public class AmazonS3Util {
-
-}

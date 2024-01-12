@@ -27,6 +27,9 @@ public class OrdersWriter implements ItemWriter<Orders> {
 	@Value("${localFilePath}")
 	private String localFilePath;
 
+	@Value("${dataFileName}")
+	private String dataFileName;
+
 	@SuppressWarnings("unchecked")
 	@Override
     public void write(List<? extends Orders> items) throws Exception {
@@ -56,7 +59,9 @@ public class OrdersWriter implements ItemWriter<Orders> {
 		
 		if(ordersCompleteList != null) {
 			try {
-				Path filePath = Paths.get(this.localFilePath, "eStock_Orders_Complete.csv");
+				String fileName = (String) dataFileName.subSequence(0, dataFileName.length()-4);
+				String fileExtension = (String) dataFileName.subSequence(fileName.length(), dataFileName.length());
+				Path filePath = Paths.get(localFilePath, fileName + "_Complete" + fileExtension);
 				FileWriter writeLine = new FileWriter(filePath.toString());
 				writeLine.write("orderId,orderCustomer,itemCode,itemSoldQTY,orderStatus\n");
 				for(int i=0; i<ordersCompleteList.size(); i++) {
@@ -80,7 +85,9 @@ public class OrdersWriter implements ItemWriter<Orders> {
 
 		if(ordersFailList != null) {
 			try {
-				Path filePath = Paths.get(this.localFilePath, "eStock_Orders_Fail.csv");
+				String fileName = (String) dataFileName.subSequence(0, dataFileName.length()-4);
+				String fileExtension = (String) dataFileName.subSequence(fileName.length(), dataFileName.length());
+				Path filePath = Paths.get(localFilePath, fileName + "_Fail" + fileExtension);
 				FileWriter writeLine = new FileWriter(filePath.toString());
 				writeLine.write("orderId,orderCustomer,itemCode,itemSoldQTY,orderStatus,orderComment\n");
 				for(int i=0; i<ordersFailList.size(); i++) {

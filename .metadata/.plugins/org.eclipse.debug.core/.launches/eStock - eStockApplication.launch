@@ -7,9 +7,9 @@
         <listEntry value="1"/>
     </listAttribute>
     <mapAttribute key="org.eclipse.debug.core.environmentVariables">
-        <mapEntry key="ACCESS_KEY" value="AKIA6OGQRCAJ6REG7R4B"/>
+        <mapEntry key="ACCESS_KEY" value="AKIA6OGQRCAJ5CCCEYSE"/>
         <mapEntry key="DB_PW" value="M01041972i"/>
-        <mapEntry key="SECRET_KEY" value="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"/>
+        <mapEntry key="SECRET_KEY" value="7rOg7r93Qu/THgKFGFj8RysliSG26sE5d4SwLMWA"/>
     </mapAttribute>
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_EXCLUDE_TEST_CODE" value="true"/>
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_SHOW_CODEDETAILS_IN_EXCEPTION_MESSAGES" value="true"/>

@@ -16,6 +16,8 @@
     <fullyQualifiedTypeName name="org.springframework.batch.item.ExecutionContext"/>
     <fullyQualifiedTypeName name="java.nio.file.Path"/>
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Value"/>
-    <fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
     <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
+    <fullyQualifiedTypeName name="org.springframework.batch.core.launch.support.RunIdIncrementer"/>
+    <fullyQualifiedTypeName name="org.springframework.batch.core.JobExecution"/>
 </qualifiedTypeNameHistroy>

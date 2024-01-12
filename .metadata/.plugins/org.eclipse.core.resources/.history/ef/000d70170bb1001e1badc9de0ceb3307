@@ -1,0 +1,81 @@
+package com.estock.batch;
+
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.JobExecution;
+import org.springframework.batch.core.JobParameters;
+import org.springframework.batch.core.Step;
+import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+
+import com.estock.model.DataFile;
+import com.estock.model.Orders;
+
+@Component
+public class BatchConfiguration {
+
+    @Autowired
+    private JobBuilderFactory jobBuilderFactory;
+
+    @Autowired
+    private StepBuilderFactory stepBuilderFactory;
+
+	@Value("${batchChunkSize}")
+	private Integer batchChunkSize;
+
+	@Bean
+    public OrdersReader ordersReader() {
+        return new OrdersReader();
+    }
+	
+	@Bean
+    public OrdersProcessor ordersProcessor() {
+        return new OrdersProcessor();
+    }
+	
+	@Bean
+    public OrdersWriter ordersWriter() {
+        return new OrdersWriter();
+    }
+
+	@Bean
+    public BatchJobParameterPrinter batchJobParameterPrinter() {
+        return new BatchJobParameterPrinter();
+    }
+	
+	@Bean
+    public Job ordersDataJob(Step ordersDataStep) {
+        return jobBuilderFactory.get("ordersDataJob")
+        		.incrementer(new RunIdIncrementer())
+                .flow(ordersDataStep)
+                .end()
+                .build();
+    }
+
+	@Bean
+    public Step ordersDataStep(OrdersReader reader, OrdersProcessor processor, OrdersWriter writer) {
+		//System.out.println("source=" + dataSource);
+        return stepBuilderFactory.get("ordersDataStep")
+                .<DataFile, Orders> chunk(batchChunkSize)
+                .reader(reader.readDataFile())
+                .processor(processor)
+                .writer(writer)
+                .build();
+    }
+    
+}
+
+class BatchJobParameterPrinter {
+    @Autowired
+    public void printJobParameters(JobExecution jobExecution) {
+        // Access JobParameters from JobExecution
+        JobParameters jobParameters = jobExecution.getJobParameters();
+
+        // Use jobParameters as needed
+        System.out.println("Job Parameters: " + jobParameters.toString());
+    }
+}
